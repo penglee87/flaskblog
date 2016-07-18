@@ -46,6 +46,36 @@ def create():
 
     return render_template('create.html', post_form=post_form)
 
+@main.route('/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit(id):
+    post = Post.query.get_or_404(id)
+    if current_user != post.author and not current_user.can(Permission.ADMINISTER):
+        abort(403)
+    form = EditForm()
+    if form.data['submit']:
+        post.title = form.title.data
+        post.summary = form.summary.data
+        post.body = form.body.data
+        db.session.add(post)
+        flash('The post has been updated.')
+        return redirect(url_for('.post', id=post.id))
+
+
+    if form.data['delete']:
+        db.session.delete(post)
+        flash('The post has been updated.')
+        return redirect(url_for('.index'))
+        #return render_template('edit_post.html', form=form,delete_form=delete_form)
+
+    if form.data['cancel']:
+        return redirect(url_for('.index'))
+
+    form.title.data = post.title
+    form.summary.data = post.summary
+    form.body.data = post.body
+    return render_template('edit_post.html', form=form)
+
 
 @main.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):

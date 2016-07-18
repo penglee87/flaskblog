@@ -1,75 +1,72 @@
-{% extends "bootstrap/base.html" %}
+<!DOCTYPE html>
+<html>
 
-{% block title %}Flasky{% endblock %}
+    <head>
+        {%block head %}
+         <title>
+             {% block title %}flasky{% endblock title %}
+         </title>
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+         <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='default.css') }}" />
 
-{% block head %}
-{{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-{% endblock %}
+        {%endblock head %}
+    </head>
 
-{% block navbar %}
-<div class="navbar navbar-default" role="navigation"  style="background-color:#0593d3;">
-    <!--  style="background-color:#C0C0C0;"
-                <p>{{current_user.is_authenticated }}</p> -->
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand active" style="color:#FFFFFF;" href="{{ url_for('main.index') }}"><b>Home</b></a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <!-- <p>{{current_user.is_anonymous }}</p> -->
+    <body>
+    {% block navbar %}
+    <header class="header">
+
+        <nav class="nav">
+            <!-- <p>{{current_user.is_anonymous }}</p> -->
+            <a href="{{ url_for('main.index') }}"><b>Home</b></a>
+
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('main.create', username=current_user.username) }}">Create</a>
+            {% endif %}
+
+            <div class="dropdown ">
                 {% if current_user.is_authenticated %}
-
-                <li><a style="color:#FFFFFF;" href="{{ url_for('main.create', username=current_user.username) }}">Create</a></li>
-                {% endif %}
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {% if current_user.is_authenticated %}
-                <li class="dropdown" >
-                    <a style="color:#FFFFFF;" href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        {{ current_user.username }} <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ url_for('main.logout') }}">Log Out</a></li>
-                    </ul>
-                </li>
+                <a href="#">
+                    {{ current_user.username }}
+                </a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('main.logout') }}">Log Out</a>
+                </div>
                 {% else %}
-                <li><a style="color:#FFFFFF;" href="{{ url_for('main.login') }}">Log In</a></li>
+                <a href="{{ url_for('main.login') }}">Log In</a>
                 {% endif %}
-            </ul>
+            </div>
+        </nav>
+    </header>
+    {% endblock %}
+
+    {% block content %}
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
         </div>
+        {% endfor %}
+
+        {% block page_content %}{% endblock %}
     </div>
-</div>
-{% endblock %}
+    {% endblock %}
 
-{% block content %}
-<div class="container">
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
-    </div>
-    {% endfor %}
+    {% block scripts %}
 
-    {% block page_content %}{% endblock %}
-</div>
-{% endblock %}
+    {{ moment.include_moment() }}
+    <script>
+    function cutLine(str)
+    {
+    return str.substr(0, 10);
+    }
 
-{% block scripts %}
-{{ super() }}
-{{ moment.include_moment() }}
-<script>
-function cutLine(str)
-{
-return str.substr(0, 10);
-}
 
-</script>
-{% endblock %}
+    </script>
+    {% endblock %}
+
+    </body>
+</html>
