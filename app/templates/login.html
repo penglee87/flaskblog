@@ -8,7 +8,14 @@
     <h1>Login</h1>
 </div>
 <div class="col-md-4">
-    {{ wtf.quick_form(form) }}
-
+<form method="POST">
+{{ form.hidden_tag() }}
+{{ form.email() }} <br>
+{{ form.password() }} <br>
+{{ form.remember_me() }} <br>
+{{ form.submit() }}<br>
+</form>
 </div>
 {% endblock %}
+
+

@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% import "_macros.html" as macros %}
 
 {% block title %}Flasky{% endblock %}
 
@@ -12,13 +11,13 @@
 <form method="POST">
 {{ post_form.hidden_tag() }}
 {{ post_form.title.label }}<br>
-{{ post_form.title() }} <br>
+{{ post_form.title( class="form-control") }} <br>
 {{ post_form.summary.label }}<br>
-{{ post_form.summary() }} <br>
+{{ post_form.summary( class="form-control") }} <br>
 {{ post_form.body.label }}<br>
-{{ post_form.body() }} <br>
-{{ post_form.submit() }}<br>
-{{ post_form.cancel() }} <br>
+{{ post_form.body( class="form-control-content") }} <br>
+{{ post_form.submit(class="btn") }}
+{{ post_form.cancel(class="btn") }}
 
 </form>
 

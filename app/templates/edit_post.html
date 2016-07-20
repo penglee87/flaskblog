@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}Flasky - Edit Post{% endblock %}
 
@@ -8,7 +7,19 @@
     <h1>Edit Post</h1>
 </div>
 <div>
-    {{ wtf.quick_form(form) }}
+    <form method="POST">
+        {{ edit_form.hidden_tag() }}
+        {{ edit_form.title.label }}<br>
+        {{ edit_form.title(class="form-control") }} <br>
+        {{ edit_form.summary.label }}<br>
+        {{ edit_form.summary(class="form-control") }} <br>
+        {{ edit_form.body.label }}<br>
+        {{ edit_form.body(class="form-control-content") }} <br>
+        {{ edit_form.submit(class="btn") }}
+        {{ edit_form.cancel(class="btn") }}
+        {{ edit_form.delete(class="btn") }}
+
+    </form>
 </div>
 {% endblock %}
 
