@@ -4,7 +4,7 @@ from .. import db
 from ..models import Permission, Role, User, Post
 from ..email import send_email
 from . import main
-from .forms import PostForm,EditForm,LoginForm
+from .forms import PostForm,EditForm,LoginForm,ChangePasswordForm
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -117,6 +117,19 @@ def login():
         flash('Invalid username or password.')
     return render_template('login.html', form=form)
 
+@main.route('/change-password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        if current_user.verify_password(form.old_password.data):
+            current_user.password = form.password.data
+            db.session.add(current_user)
+            flash('Your password has been updated.')
+            return redirect(url_for('.index'))
+        else:
+            flash('Invalid password.')
+    return render_template("change_password.html", form=form)
 
 @main.route('/logout')
 @login_required

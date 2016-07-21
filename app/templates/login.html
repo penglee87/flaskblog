@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}Flasky - Login{% endblock %}
 
@@ -7,13 +6,16 @@
 <div class="page-header">
     <h1>Login</h1>
 </div>
-<div class="col-md-4">
+<div >
 <form method="POST">
 {{ form.hidden_tag() }}
-{{ form.email() }} <br>
-{{ form.password() }} <br>
-{{ form.remember_me() }} <br>
-{{ form.submit() }}<br>
+{{ form.email.label }}<br>
+{{ form.email(class="form-control-login") }} <br>
+{{ form.password.label }}<br>
+{{ form.password(class="form-control-login") }} <br>
+{{ form.remember_me() }}
+{{ form.remember_me.label }}<br><br>
+{{ form.submit(class="btn") }}
 </form>
 </div>
 {% endblock %}

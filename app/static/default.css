@@ -9,8 +9,25 @@ body{
 }
 
 a {
-	text-decoration: none
+	text-decoration: none;
+	color:#0000FF;
 }
+/*
+a:visited {
+    text-decoration: none;
+    color: #666;
+}
+
+a:hover {
+    color:#337ab7;
+    text-decoration:underline;
+}
+
+
+a:visited {
+    color:#337ab7;
+}
+*/
 
 li{
 	list-style: none;
@@ -30,6 +47,12 @@ li{
 	color: #8a6d3b;
 	background-color: #fcf8e3;
 	border-color: #faebcc;
+}
+
+.page-header {
+  padding-bottom: 9px;
+  margin: 40px 0 20px;
+  border-bottom: 1px solid #eee;
 }
 
 .form-control {
@@ -53,6 +76,19 @@ li{
 	padding: 6px 12px;
 	font-size: 14px;
 	line-height: 1.4;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.form-control-login {
+	display: block;
+	width: 30%;
+	height: 25px;
+	padding: 6px 12px;
+	font-size: 14px;
 	color: #555;
 	background-color: #fff;
 	background-image: none;
@@ -94,6 +130,8 @@ li{
 }
 
 
+
+
 .header {
 	position: fixed;
 	top: 0;
@@ -129,7 +167,7 @@ li{
 	line-height: 45px;
 	text-align: center;
 	display: block;
-	color: #f2f4f5;
+	color: #fff;
 	text-shadow: 0 1px 1px rgba(0,0,0,.12);
 	font-size: 24px
 }
@@ -140,30 +178,26 @@ li{
 	float: right;
 	position: relative;
 	min-width: 120px;
-	margin-left: 15px;
-	z-index: 10
+	margin-left: 0px;
 }
 
 .header-profile .header-profile-userinfo {
 	position: relative;
+	padding-left: 0px;
 	height: 45px;
 	line-height: 45px;
-	text-indent: 46px;
 	color: #fff;
 	text-decoration: none;
 	border-top: 0;
 	background: transparent;
 	box-shadow: none;
 	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden
 }
 
 .header-profile a {
 	display: block;
 	width: 120px;
 	background-color: #095fb3;
-	text-shadow: 0 1px 1px rgba(0,0,0,.12);
 	font-size: 24px
 }
 
@@ -175,24 +209,20 @@ li{
 
 .header-dropdown {
 	display: none;
-	margin: 0;
 	position: absolute;
-	left: 0
+	margin: 0px;
+	left: 0px;
 }
 
-.header-dropdown .zg-icon {
-	width: 20px;
-	height: 20px;
-	margin: 0 11px 0 15px;
-	vertical-align: -7px
-}
 
 .header-dropdown li {
-	margin: 0;
-	list-style: none
+	margin: 0px;
+	padding-left: 0px;
+	list-style: none;
 }
 
 .header-dropdown li a {
+    padding-left: 2px;
 	display: block;
 	width: 145px;
 	height: 40px;
@@ -205,7 +235,7 @@ li{
 	text-overflow: ellipsis;
 	overflow: hidden;
 	cursor: pointer;
-	font-size: 24px
+	font-size: 16px;
 }
 
 
@@ -229,7 +259,6 @@ li{
 	position: relative;
 	height: 28px;
 	line-height: 28px;
-	color: #666;
 }
 
 .container-side-nav-link {
@@ -244,7 +273,15 @@ li{
 	display: block;
 }
 
+.container-blog a:hover{
+	text-decoration:underline;
+}
+
 /*
+.container-side-nav-link li a:visited{
+	color: #0066cc;
+}
+
 .zu-main-content {
 	float: left;
 	width: 100%
