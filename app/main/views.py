@@ -53,9 +53,6 @@ def edit(id):
     if current_user != post.author and not current_user.can(Permission.ADMINISTER):
         abort(403)
     edit_form = EditForm()
-    edit_form.title.data = post.title
-    edit_form.summary.data = post.summary
-    edit_form.body.data = post.body
     if edit_form.data['submit']:
         post.title = edit_form.title.data
         post.summary = edit_form.summary.data
@@ -71,6 +68,11 @@ def edit(id):
 
     if edit_form.data['cancel']:
         return redirect(url_for('.index'))
+
+
+    edit_form.title.data = post.title
+    edit_form.summary.data = post.summary
+    edit_form.body.data = post.body
 
     return render_template('edit_post.html', edit_form=edit_form)
 
