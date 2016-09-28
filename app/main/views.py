@@ -65,15 +65,12 @@ def edit(id):
         flash('The post has been delete.')
         return redirect(url_for('.index'))
         #return render_template('edit_post.html', form=form,delete_form=delete_form)
-
     if edit_form.data['cancel']:
         return redirect(url_for('.index'))
-
 
     edit_form.title.data = post.title
     edit_form.summary.data = post.summary
     edit_form.body.data = post.body
-
     return render_template('edit_post.html', edit_form=edit_form)
 
 

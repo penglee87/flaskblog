@@ -27,7 +27,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or 'mysql://flaskyblog:flaskyblog@127.0.0.1/flaskyblog'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or 'mysql://flasky:flasky@127.0.0.1/flaskyblog'
         #'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
         #'mysql://flaskyblog:flaskyblog@127.0.0.1/flaskyblog'
 
